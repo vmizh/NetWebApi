@@ -1,0 +1,25 @@
+﻿using Common.Repositories;
+using Data.SqlServer.KursSystem.Context;
+using Data.SqlServer.KursSystem.Entities;
+using Data.SqlServer.KursSystem.Repositories;
+using Data.SqlServer.KursSystem.Repositories.DataSourceRepository;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Data.SqlServer.KursSystem;
+
+public static class ServiceRegistration
+{
+    public static IServiceCollection AddDataDependencies(this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        services.AddDbContext<KursSystemContext>(opt =>
+            opt.UseSqlServer("name=SystemConnection"));
+
+        services.AddScoped<IBaseRepository<DataSource>, BaseRepository<DataSource>>();
+        services.AddScoped<IDataSourceRepository, DataSourceRepository>();
+
+        return services;
+    }
+}
