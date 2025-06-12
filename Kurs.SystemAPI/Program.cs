@@ -1,7 +1,6 @@
-using Common.Repositories;
 using Data.SqlServer.KursSystem;
-using Data.SqlServer.KursSystem.Entities;
 using Kurs.System.Services;
+using Kurs.SystemAPI.EndPoints;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,14 +26,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
+app.UseCors("AllowAnyOrigin");
 
-app.MapGet("/datasource", GetDataSource);
-
-static async Task<IEnumerable<DataSource>> GetDataSource(IBaseRepository<DataSource> rep)
-{
-    var data = await rep.GetAllAsync();
-    return data;
-}
-
+app.ConfigureDataSourceEndPoints();
+app.ConfigureUserEndPoints();
 
 app.Run();

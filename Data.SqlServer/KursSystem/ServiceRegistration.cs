@@ -3,6 +3,7 @@ using Data.SqlServer.KursSystem.Context;
 using Data.SqlServer.KursSystem.Entities;
 using Data.SqlServer.KursSystem.Repositories;
 using Data.SqlServer.KursSystem.Repositories.DataSourceRepository;
+using Data.SqlServer.KursSystem.Repositories.UserRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,9 @@ public static class ServiceRegistration
 
         services.AddScoped<IBaseRepository<DataSource>, BaseRepository<DataSource>>();
         services.AddScoped<IDataSourceRepository, DataSourceRepository>();
+
+        services.AddScoped<IBaseRepository<User>, BaseRepository<User>>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
         return services;
     }

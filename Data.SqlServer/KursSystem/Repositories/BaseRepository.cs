@@ -24,16 +24,13 @@ public class BaseRepository<T>(KursSystemContext dbContext) : IBaseRepository<T>
 
     public virtual async Task UpdateAsync(T entity)
     {
-        var id = ((IBaseIdentity)entity).Id;
-        var old = await dbContext.Set<T>().FindAsync(id);
-        if (old is not null)
-        {
-            dbContext.Set<T>().Remove(old);
+        //var id = ((IBaseIdentity)entity).Id;
+        //var old = await dbContext.Set<T>().FindAsync(id);
+        //if (old is not null)
+        //{
+            dbContext.Set<T>().Update(entity);
             await dbContext.SaveChangesAsync();
-        }
-
-        await dbContext.Set<T>().AddAsync(entity);
-        await dbContext.SaveChangesAsync();
+        //}
     }
 
     public virtual async Task UpdateManyAsync(IEnumerable<T> entities)
@@ -47,7 +44,7 @@ public class BaseRepository<T>(KursSystemContext dbContext) : IBaseRepository<T>
 
     public async Task DeleteAsync(IBaseIdentity id)
     {
-        var old = await dbContext.Set<T>().FindAsync(id);
+        var old = await dbContext.Set<T>().FindAsync(id.Id);
         if (old is not null)
         {
             dbContext.Set<T>().Remove(old);
@@ -62,7 +59,7 @@ public class BaseRepository<T>(KursSystemContext dbContext) : IBaseRepository<T>
         var sett = dbContext.Set<T>();
         foreach (var id in enumerable)
         {
-            var old = await sett.FindAsync(id);
+            var old = await sett.FindAsync(id.Id);
             if (old is not null)
                 sett.Remove(old);
         }
@@ -72,7 +69,7 @@ public class BaseRepository<T>(KursSystemContext dbContext) : IBaseRepository<T>
 
     public async Task<T?> GetByIdAsync(IBaseIdentity id)
     {
-        return await dbContext.Set<T>().FindAsync(id);
+        return await dbContext.Set<T>().FindAsync(id.Id);
     }
 
     public async Task<IEnumerable<T>> GetAllAsync()
@@ -80,3 +77,5 @@ public class BaseRepository<T>(KursSystemContext dbContext) : IBaseRepository<T>
         return await dbContext.Set<T>().ToListAsync();
     }
 }
+
+

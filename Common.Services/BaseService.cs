@@ -3,6 +3,7 @@ using Common.Helper.API;
 using Common.Helper.Interfaces;
 using Common.Helper.Interfaces.Identity;
 using Common.Repositories;
+using Mapster;
 using Microsoft.AspNetCore.Http;
 using Serilog;
 
@@ -23,7 +24,8 @@ public class BaseService<T>(IBaseRepository<T> repository) : IBaseService<T>
         var response = new APIResponse();
         try
         {
-            if (!Guid.Empty.Equals(((IBaseIdentity)item).Id))
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+            if (((IBaseIdentity)item).Id is not null)
             {
                 await repository.CreateAsync(item);
                 response.IsSuccess = true;
@@ -78,7 +80,7 @@ public class BaseService<T>(IBaseRepository<T> repository) : IBaseService<T>
         {
             if (!Guid.Empty.Equals(((IBaseIdentity)item).Id))
             {
-                await repository.UpdateAsync(item);
+                await repository.UpdateAsync(item.Adapt<T>());
                 response.IsSuccess = true;
                 response.StatusCode = HttpStatusCode.OK;
                 response.Result = true;
@@ -220,6 +222,231 @@ public class BaseService<T>(IBaseRepository<T> repository) : IBaseService<T>
             response.IsSuccess = true;
             response.StatusCode = HttpStatusCode.OK;
             response.Result = data;
+            return Results.Ok(response);
+        }
+        catch (Exception ex)
+        {
+            return APIResponse.ReturnError(response, ex, Log.Logger);
+        }
+    }
+}
+
+public class BaseDtoService<T, D>(IBaseRepository<T> repository) : IBaseDtoService<T, D>
+    where T : class
+    where D : class
+
+{
+    protected virtual string RepositoryName { set; get; } = "Базовый репозиторий";
+
+    public virtual async Task<IResult> CreateAsync(D item)
+    {
+        var name = string.Empty;
+        if (item is IName n)
+            name = n.Name;
+        Log.Logger.Information($"{RepositoryName}. Создание сущности {name}({((IBaseIdentity)item).Id})");
+        var response = new APIResponse();
+        try
+        {
+            if (!Guid.Empty.Equals(((IBaseIdentity)item).Id))
+            {
+                await repository.CreateAsync(item.Adapt<T>());
+                response.IsSuccess = true;
+                response.StatusCode = HttpStatusCode.OK;
+                response.Result = item;
+                return Results.Ok(response);
+            }
+
+            response.IsSuccess = true;
+            response.StatusCode = HttpStatusCode.NoContent;
+            return Results.NoContent();
+        }
+        catch (Exception ex)
+        {
+            return APIResponse.ReturnError(response, ex, Log.Logger);
+        }
+    }
+
+    public virtual async Task<IResult> CreateManyAsync(IEnumerable<D> items)
+    {
+        Log.Logger.Information($"{RepositoryName}. Создание сущностей из списка");
+        var response = new APIResponse();
+        try
+        {
+            var enumerable = items as D[] ?? items.ToArray();
+            if (enumerable.Any())
+            {
+                await repository.CreateManyAsync(enumerable.Select(t => t.Adapt<T>()).ToList());
+                response.IsSuccess = true;
+                response.StatusCode = HttpStatusCode.OK;
+                response.Result = true;
+                return Results.Ok(response);
+            }
+
+            response.IsSuccess = true;
+            response.StatusCode = HttpStatusCode.NoContent;
+            return Results.NoContent();
+        }
+        catch (Exception ex)
+        {
+            return APIResponse.ReturnError(response, ex, Log.Logger);
+        }
+    }
+
+    public virtual async Task<IResult> UpdateAsync(D item)
+    {
+        var name = string.Empty;
+        if (item is IName n)
+            name = n.Name;
+        Log.Logger.Information($"{RepositoryName}. Обновление сущности {name}({((IBaseIdentity)item).Id})");
+        var response = new APIResponse();
+        try
+        {
+            if (!Guid.Empty.Equals(((IBaseIdentity)item).Id))
+            {
+                await repository.UpdateAsync(item.Adapt<T>());
+                response.IsSuccess = true;
+                response.StatusCode = HttpStatusCode.OK;
+                response.Result = true;
+                return Results.Ok(response);
+            }
+
+            response.IsSuccess = true;
+            response.StatusCode = HttpStatusCode.NoContent;
+            return Results.NoContent();
+        }
+        catch (Exception ex)
+        {
+            return APIResponse.ReturnError(response, ex, Log.Logger);
+        }
+    }
+
+    public virtual async Task<IResult> UpdateManyAsync(IEnumerable<D> items)
+    {
+        Log.Logger.Information($"{RepositoryName}. Обновление сущностей из списка");
+        var response = new APIResponse();
+        try
+        {
+            var enumerable = items as D[] ?? items.ToArray();
+            if (enumerable.Any())
+            {
+                await repository.UpdateManyAsync(enumerable.Select(t => t.Adapt<T>()).ToList());
+                response.IsSuccess = true;
+                response.StatusCode = HttpStatusCode.OK;
+                response.Result = true;
+                return Results.Ok(response);
+            }
+
+            response.IsSuccess = true;
+            response.StatusCode = HttpStatusCode.NoContent;
+            return Results.NoContent();
+        }
+        catch (Exception ex)
+        {
+            return APIResponse.ReturnError(response, ex, Log.Logger);
+        }
+    }
+
+    public virtual async Task<IResult> DeleteAsync(IBaseIdentity id)
+    {
+        Log.Logger.Information($"{RepositoryName}. Удаление сущности с id='{id})'");
+        var response = new APIResponse
+        {
+            IsSuccess = false
+        };
+        try
+        {
+            if (!Guid.Empty.Equals(id))
+            {
+                await repository.DeleteAsync(id);
+
+                response.IsSuccess = true;
+                response.StatusCode = HttpStatusCode.OK;
+                response.Result = true;
+                return Results.Ok(response);
+            }
+
+            response.IsSuccess = true;
+            response.StatusCode = HttpStatusCode.NoContent;
+            return Results.NoContent();
+        }
+        catch (Exception ex)
+        {
+            return APIResponse.ReturnError(response, ex, Log.Logger);
+        }
+    }
+
+    public virtual async Task<IResult> DeleteManyAsync(IEnumerable<IBaseIdentity> ids)
+    {
+        Log.Logger.Information($"{RepositoryName}. Удаление сущностей из списка");
+        var response = new APIResponse();
+        try
+        {
+            if (ids.Any())
+            {
+                await repository.DeleteManyAsync(ids.ToList());
+
+                response.IsSuccess = true;
+                response.StatusCode = HttpStatusCode.OK;
+                response.Result = true;
+                return Results.Ok(response);
+            }
+
+            response.IsSuccess = true;
+            response.StatusCode = HttpStatusCode.NoContent;
+            return Results.NoContent();
+        }
+        catch (Exception ex)
+        {
+            return APIResponse.ReturnError(response, ex, Log.Logger);
+        }
+    }
+
+    public virtual async Task<IResult> GetByIdAsync(IBaseIdentity id)
+    {
+        Log.Logger.Information($"{RepositoryName}. Получение сущности с id='{id})'");
+        var response = new APIResponse();
+        try
+        {
+            if (!Guid.Empty.Equals(id))
+            {
+                var item = await repository.GetByIdAsync(id);
+                if (item is not null)
+                {
+                    response.IsSuccess = true;
+                    response.StatusCode = HttpStatusCode.OK;
+                    response.Result = item.Adapt<D>();
+                    return Results.Ok(response);
+                }
+            }
+
+            response.IsSuccess = true;
+            response.StatusCode = HttpStatusCode.NoContent;
+            return Results.NoContent();
+        }
+        catch (Exception ex)
+        {
+            return APIResponse.ReturnError(response, ex, Log.Logger);
+        }
+    }
+
+    public virtual async Task<IResult> GetAllAsync()
+    {
+        Log.Logger.Information($"{RepositoryName}. Получение всех записей");
+        var response = new APIResponse();
+        try
+        {
+            var data = await repository.GetAllAsync();
+            var enumerable = data as T[] ?? data.ToArray();
+            if (!enumerable.Any())
+            {
+                response.IsSuccess = true;
+                response.StatusCode = HttpStatusCode.NoContent;
+                return Results.NoContent();
+            }
+
+            response.IsSuccess = true;
+            response.StatusCode = HttpStatusCode.OK;
+            response.Result = enumerable.Select(item => item.Adapt<D>()).ToList();
             return Results.Ok(response);
         }
         catch (Exception ex)

@@ -1,6 +1,61 @@
 @Kurs.System_HostAddress = http://localhost:5169
 
-GET {{Kurs.System_HostAddress}}/datasource/
+GET {{Kurs.System_HostAddress}}/api/datasource/all/
+Accept: application/json
+
+###
+
+GET {{Kurs.System_HostAddress}}/api/datasource/dto/all/
+Accept: application/json
+
+###
+
+GET {{Kurs.System_HostAddress}}/api/user/all
+Accept: application/json
+
+###
+
+GET {{Kurs.System_HostAddress}}/api/user/01976416-7a5d-73da-a6e1-6f889019ccf8
+Accept: application/json
+
+###
+
+
+GET {{Kurs.System_HostAddress}}/api/user/user-name/sysadm
+Accept: application/json
+
+###
+POST {{Kurs.System_HostAddress}}/api/user/
+Content-Type: application/json
+{
+	"Id": "01976416-7a5d-73da-a6e1-6f889019ccf8",
+	"Name": "Test123",
+	"Note": "dfdsfdfds",
+	"IsAdmin": false,
+	"IsTester": false,
+	"IsDeleted": false,
+	"Avatar": null,
+	"FullName": "Вася Пупкин",
+	"ThemeName": "MetropolisLight"
+}
+###
+
+PUT {{Kurs.System_HostAddress}}/api/user/
+Content-Type: application/json
+{
+	"Id": "01976416-7a5d-73da-a6e1-6f889019ccf8",
+	"Name": "Test123",
+	"Note": "1111111",
+	"IsAdmin": false,
+	"IsTester": false,
+	"IsDeleted": false,
+	"Avatar": null,
+	"FullName": "Вася Пупкин Великий",
+	"ThemeName": "MetropolisLight"
+}
+###
+
+DELETE {{Kurs.System_HostAddress}}/api/user/01976416-7a5d-73da-a6e1-6f889019ccf8
 Accept: application/json
 
 ###

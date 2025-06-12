@@ -13,3 +13,17 @@ public interface IBaseService<T> where T : class
     Task<IResult> GetByIdAsync(IBaseIdentity id);
     Task<IResult> GetAllAsync();
 }
+
+public interface IBaseDtoService<T,D> 
+    where T : class
+    where D : class
+{
+    Task<IResult> CreateAsync(D item);
+    Task<IResult> CreateManyAsync(IEnumerable<D> items);
+    Task<IResult> UpdateAsync(D item);
+    Task<IResult> UpdateManyAsync(IEnumerable<D> items);
+    Task<IResult> DeleteAsync(IBaseIdentity id);
+    Task<IResult> DeleteManyAsync(IEnumerable<IBaseIdentity> ids);
+    Task<IResult> GetByIdAsync(IBaseIdentity id);
+    Task<IResult> GetAllAsync();
+}
