@@ -11,10 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Postgres", "Data.Postg
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisClient", "RedisClient\RedisClient.csproj", "{5ECF554F-D7C6-4DB5-A5A0-1FF31299D42A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kurs.Cache", "Kurs.Cache\Kurs.Cache.csproj", "{9D60B142-7F47-428C-8A87-E39C67FEE995}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kurs.References", "Kurs.References\Kurs.References.csproj", "{D4AE289D-6E60-4AC0-873D-CA74EFCEEF28}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kurs.SystemAPI", "Kurs.SystemAPI\Kurs.SystemAPI.csproj", "{8EB6CEE8-6FD2-C258-23B4-D79BA549D075}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kurs.System.Services", "Kurs.System.Services\Kurs.System.Services.csproj", "{323032FE-7925-48C2-8C21-5F1A27F507C5}"
@@ -26,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Repositories", "Common.Repositories\Common.Repositories.csproj", "{690C0072-CF07-418A-B6E1-69FCB936382D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{1CDED5AB-2D10-4634-9B11-E81419E80661}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kurs.ReferencesAPI", "Kurs.ReferencesAPI\Kurs.ReferencesAPI.csproj", "{EEDB1E93-BDCA-5388-6B67-ACC4B3364309}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,14 +47,6 @@ Global
 		{5ECF554F-D7C6-4DB5-A5A0-1FF31299D42A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5ECF554F-D7C6-4DB5-A5A0-1FF31299D42A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5ECF554F-D7C6-4DB5-A5A0-1FF31299D42A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9D60B142-7F47-428C-8A87-E39C67FEE995}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D60B142-7F47-428C-8A87-E39C67FEE995}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9D60B142-7F47-428C-8A87-E39C67FEE995}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D60B142-7F47-428C-8A87-E39C67FEE995}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D4AE289D-6E60-4AC0-873D-CA74EFCEEF28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D4AE289D-6E60-4AC0-873D-CA74EFCEEF28}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D4AE289D-6E60-4AC0-873D-CA74EFCEEF28}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D4AE289D-6E60-4AC0-873D-CA74EFCEEF28}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8EB6CEE8-6FD2-C258-23B4-D79BA549D075}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8EB6CEE8-6FD2-C258-23B4-D79BA549D075}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EB6CEE8-6FD2-C258-23B4-D79BA549D075}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -81,6 +71,10 @@ Global
 		{1CDED5AB-2D10-4634-9B11-E81419E80661}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CDED5AB-2D10-4634-9B11-E81419E80661}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CDED5AB-2D10-4634-9B11-E81419E80661}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEDB1E93-BDCA-5388-6B67-ACC4B3364309}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEDB1E93-BDCA-5388-6B67-ACC4B3364309}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEDB1E93-BDCA-5388-6B67-ACC4B3364309}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEDB1E93-BDCA-5388-6B67-ACC4B3364309}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
