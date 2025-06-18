@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+using Common.Helper.Interfaces.Identity;
 
 namespace Data.SqlServer.KursSystem.Entities;
 
 /// <summary>
 /// Список документов для главного окна приложения
 /// </summary>
-public partial class KursMenuItem
+public partial class KursMenuItem : IIntIdentity
 {
     /// <summary>
     /// Ключ
@@ -58,4 +58,9 @@ public partial class KursMenuItem
     public virtual ICollection<UserMenuRight> UserMenuRights { get; set; } = new List<UserMenuRight>();
 
     public virtual ICollection<UserRole> Roles { get; set; } = new List<UserRole>();
+    object IBaseIdentity.Id
+    {
+        get => Id;
+        set => Id = (int)value;
+    }
 }

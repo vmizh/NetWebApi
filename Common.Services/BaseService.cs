@@ -24,19 +24,11 @@ public class BaseService<T>(IBaseRepository<T> repository) : IBaseService<T>
         var response = new APIResponse();
         try
         {
-            // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-            if (((IBaseIdentity)item).Id is not null)
-            {
-                await repository.CreateAsync(item);
-                response.IsSuccess = true;
-                response.StatusCode = HttpStatusCode.OK;
-                response.Result = item;
-                return Results.Ok(response);
-            }
-
+            await repository.CreateAsync(item);
             response.IsSuccess = true;
-            response.StatusCode = HttpStatusCode.NoContent;
-            return Results.NoContent();
+            response.StatusCode = HttpStatusCode.OK;
+            response.Result = item;
+            return Results.Ok(response);
         }
         catch (Exception ex)
         {
@@ -50,9 +42,10 @@ public class BaseService<T>(IBaseRepository<T> repository) : IBaseService<T>
         var response = new APIResponse();
         try
         {
-            if (items.Any())
+            var enumerable = items as T[] ?? items.ToArray();
+            if (enumerable.Any())
             {
-                await repository.CreateManyAsync(items.ToList());
+                await repository.CreateManyAsync(enumerable.ToList());
                 response.IsSuccess = true;
                 response.StatusCode = HttpStatusCode.OK;
                 response.Result = true;
@@ -103,9 +96,10 @@ public class BaseService<T>(IBaseRepository<T> repository) : IBaseService<T>
         var response = new APIResponse();
         try
         {
-            if (items.Any())
+            var enumerable = items as T[] ?? items.ToArray();
+            if (enumerable.Any())
             {
-                await repository.UpdateManyAsync(items.ToList());
+                await repository.UpdateManyAsync(enumerable.ToList());
                 response.IsSuccess = true;
                 response.StatusCode = HttpStatusCode.OK;
                 response.Result = true;
@@ -157,9 +151,10 @@ public class BaseService<T>(IBaseRepository<T> repository) : IBaseService<T>
         var response = new APIResponse();
         try
         {
-            if (ids.Any())
+            var baseIdentities = ids as IBaseIdentity[] ?? ids.ToArray();
+            if (baseIdentities.Any())
             {
-                await repository.DeleteManyAsync(ids.ToList());
+                await repository.DeleteManyAsync(baseIdentities.ToList());
 
                 response.IsSuccess = true;
                 response.StatusCode = HttpStatusCode.OK;
@@ -381,9 +376,10 @@ public class BaseDtoService<T, D>(IBaseRepository<T> repository) : IBaseDtoServi
         var response = new APIResponse();
         try
         {
-            if (ids.Any())
+            var baseIdentities = ids as IBaseIdentity[] ?? ids.ToArray();
+            if (baseIdentities.Any())
             {
-                await repository.DeleteManyAsync(ids.ToList());
+                await repository.DeleteManyAsync(baseIdentities.ToList());
 
                 response.IsSuccess = true;
                 response.StatusCode = HttpStatusCode.OK;
@@ -454,4 +450,5 @@ public class BaseDtoService<T, D>(IBaseRepository<T> repository) : IBaseDtoServi
             return APIResponse.ReturnError(response, ex, Log.Logger);
         }
     }
+
 }

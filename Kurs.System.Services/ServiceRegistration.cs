@@ -1,4 +1,5 @@
 ﻿using Kurs.System.Services.Services.DataSourceServices;
+using Kurs.System.Services.Services.MenuServices;
 using Kurs.System.Services.Services.UserService;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,8 @@ public static class ServiceRegistration
         services.AddScoped<IDataSourceDtoService, DataSourceDtoService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IUserDtoService, UserDtoService>();
+        services.AddScoped<IMenuService, MenuService>();
+        services.AddScoped<IMenuDtoService, MenuDtoService>();
         return services;
     }
 }

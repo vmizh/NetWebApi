@@ -11,4 +11,11 @@ public class UserRepository(KursSystemContext dbContext)
     {
         return await dbContext.Set<User>().FirstOrDefaultAsync(_ => _.Name == name);
     }
+
+    public async Task<IEnumerable<UserMenuRight>?>  GetRightsMenu(Guid userId, Guid dbId)
+    {
+        var user = await dbContext.Set<User>().FirstOrDefaultAsync(_ => _.Id == userId);
+        if (user == null) return null;
+        return await dbContext.Set<UserMenuRight>().Where(_ => _.LoginName == user.Name && _.DBId == dbId).ToListAsync();
+    }
 }

@@ -9,17 +9,17 @@ namespace Data.SqlServer.KursSystem.Entities;
 public partial class KursMenuGroup
 {
     /// <summary>
-    /// Ключ
+    ///     Ключ
     /// </summary>
     public int Id { get; set; }
 
     /// <summary>
-    /// Наименование группы
+    ///     Наименование группы
     /// </summary>
     public string Name { get; set; } = null!;
 
     /// <summary>
-    /// пРИМЕЧАНИЯ
+    ///     пРИМЕЧАНИЯ
     /// </summary>
     public string? Note { get; set; }
 

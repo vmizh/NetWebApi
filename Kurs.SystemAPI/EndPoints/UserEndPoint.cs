@@ -1,12 +1,12 @@
 ﻿using Common.Helper.API;
 using DTO.Common;
-using DTO.KursSystemDTO;
 using Kurs.System.Services.Services.UserService;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System.Net;
 using Common.Helper.Interfaces;
 using Common.Helper.Interfaces.Identity;
+using DTO.KursSystemDTO.User;
 
 namespace Kurs.SystemAPI.EndPoints;
 

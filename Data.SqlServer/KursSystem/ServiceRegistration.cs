@@ -3,6 +3,7 @@ using Data.SqlServer.KursSystem.Context;
 using Data.SqlServer.KursSystem.Entities;
 using Data.SqlServer.KursSystem.Repositories;
 using Data.SqlServer.KursSystem.Repositories.DataSourceRepository;
+using Data.SqlServer.KursSystem.Repositories.KursMenu;
 using Data.SqlServer.KursSystem.Repositories.UserRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +24,9 @@ public static class ServiceRegistration
 
         services.AddScoped<IBaseRepository<User>, BaseRepository<User>>();
         services.AddScoped<IUserRepository, UserRepository>();
+
+        services.AddScoped<IBaseRepository<KursMenuItem>, BaseRepository<KursMenuItem>>();
+        services.AddScoped<IKursMenuRepository, KursMenuRepository>();
 
         return services;
     }

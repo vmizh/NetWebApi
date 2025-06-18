@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Common.Helper.Interfaces.Identity;
 
 namespace Data.SqlServer.KursSystem.Entities;
 
-public partial class User
+public partial class User : IGuidIdentity
 {
     public Guid Id { get; set; }
 
@@ -46,4 +45,9 @@ public partial class User
     public virtual ICollection<DataSource> DBs { get; set; } = new List<DataSource>();
 
     public virtual ICollection<SignatureType> Signs { get; set; } = new List<SignatureType>();
+    object IBaseIdentity.Id
+    {
+        get => Id;
+        set => Id = (Guid)value;
+    }
 }

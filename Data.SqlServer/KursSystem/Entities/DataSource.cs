@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Common.Helper.Interfaces.Identity;
+﻿using Common.Helper.Interfaces.Identity;
 
 namespace Data.SqlServer.KursSystem.Entities;
 
-public partial class DataSource
+public partial class DataSource : IGuidIdentity
 {
     public Guid Id { get; set; }
 
@@ -43,5 +41,10 @@ public partial class DataSource
     public virtual ICollection<UserRightsResponsibilityCenter> UserRightsResponsibilityCenters { get; set; } = new List<UserRightsResponsibilityCenter>();
 
     public virtual ICollection<User> Users { get; set; } = new List<User>();
-    
+
+    object IBaseIdentity.Id
+    {
+        get => Id;
+        set => Id = (Guid)value;
+    }
 }

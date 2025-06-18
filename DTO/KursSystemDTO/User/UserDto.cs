@@ -1,7 +1,8 @@
 ﻿using Common.Helper.Interfaces;
 using Common.Helper.Interfaces.Identity;
+using DTO.KursSystemDTO.KursMenu;
 
-namespace DTO.KursSystemDTO;
+namespace DTO.KursSystemDTO.User;
 
 public record UserDto : IGuidIdentity, IName
 {
@@ -31,3 +32,16 @@ public record UserDto : IGuidIdentity, IName
     public required Guid Id { get; set; }
 }
 // {"Id":"","Name":"","Nate":"","IsAdmin":false,IsTester:false,IsDeleted,Avatar:null,FullName:"",ThemeName:"MetropolisLight"}
+
+public record UserWithMenuDto : UserDto
+{
+    public List<KursMenuItemDto> FavoritesMenu { set; get; } = [];
+    public List<KursMenuItemDto> RightsMenu { set; get; } = [];
+    public List<UserMenuGroupIerarhyDto> OrderMenu { set; get; } = [];
+}
+
+public record UserMenuGroupIerarhyDto
+{
+    public required KursMenuGroupDto Group { set; get; }
+    public required Dictionary<int, KursMenuItemDto> Menus { set; get; } = [];
+}

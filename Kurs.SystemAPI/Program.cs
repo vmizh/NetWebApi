@@ -18,17 +18,22 @@ builder.Services.AddCors(options =>
     });
 });
 
-
+builder.Services.AddSwaggerGen();
 builder.Services.AddDataDependencies(builder.Configuration);
 builder.Services.AddServiceDependencies(builder.Configuration);
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 app.UseHttpsRedirection();
 app.UseCors("AllowAnyOrigin");
 
 app.ConfigureDataSourceEndPoints();
 app.ConfigureUserEndPoints();
+app.ConfigureMenuEndPoints();
 
 app.Run();
