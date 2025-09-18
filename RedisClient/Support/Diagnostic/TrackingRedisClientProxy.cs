@@ -1,4 +1,4 @@
-#if !(NETSTANDARD2_0 || NETSTANDARD2_1 || NET6_0 || NET8_0)
+#if !(NETSTANDARD2_0 || NETSTANDARD2_1 || NET6_0 || NET10_0)
 using System;
 using System.Reflection;
 using System.Runtime.Remoting.Messaging;

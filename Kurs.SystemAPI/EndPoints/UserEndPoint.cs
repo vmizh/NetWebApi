@@ -22,6 +22,21 @@ public static class UserEndPoint
         userMap.MapPost("/", AddUser).WithName("AddUser");
         userMap.MapPut("/", UpdateUser).WithName("UpdateUser");
         userMap.MapDelete("/{id:guid}", DeleteUser).WithName("DeleteUser");
+
+        userMap.MapGet("/full/id/{userId:guid}/{dbId:guid}", GetUserIdFull).WithName("GetUserIdFull");
+        userMap.MapGet("/full/name/{name:alpha}/{dbId:guid}", GetUserNameFull).WithName("GetUserNameFull");
+    }
+
+    private static async Task<IResult>  GetUserIdFull(IUserDtoService service, Guid userId, Guid dbId)
+    {
+        Log.Logger.Information($"Получение пользователя с правами на главное меню '{userId}'");
+        return await service.GetFullByIdAsync(userId,dbId);
+    }
+
+    private static async Task<IResult>  GetUserNameFull(IUserDtoService service, string name, Guid dbId)
+    {
+        Log.Logger.Information($"Получение пользователя с правами на главное меню '{name}'");
+        return await service.GetByNameFullAsync(name,dbId);
     }
 
     private static async Task<IResult> DeleteUser(Guid id, IUserDtoService service)
@@ -85,6 +100,7 @@ public static class UserEndPoint
         Log.Logger.Information("Получение списка пользовтелей, зарегистрированных в курсе");
         return await service.GetAllAsync();
     }
+
     private static async Task<IResult> GetUsersDto(IUserDtoService service)
     {
         Log.Logger.Information("Получение списка пользователей, зарегистрированных в курсе");

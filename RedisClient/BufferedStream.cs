@@ -1,4 +1,4 @@
-#if NETCORE || NET8_0
+#if NETCORE || NET8_0 || NET10_0
 using System;
 using System.IO;
 using System.Net.Sockets;

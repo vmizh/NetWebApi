@@ -3,7 +3,7 @@ using Common.Repositories;
 using Data.SqlServer.KursSystem.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace Data.SqlServer.KursSystem.Repositories;
+namespace Data.SqlServer.Base;
 
 public class BaseRepository<T>(KursSystemContext dbContext) : IBaseRepository<T> where T : class, IBaseIdentity
 {

@@ -37,7 +37,7 @@ public static class DynamicProxy
     static DynamicProxy()
     {
         var assemblyName = new AssemblyName("DynImpl");
-#if NETCORE || NET8_0
+#if NETCORE || NET10_0
         DynamicAssembly = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
 #else
         DynamicAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave);
@@ -61,7 +61,7 @@ public static class DynamicProxy
         foreach (var face in targetType.GetInterfaces())
             IncludeType(face, typeBuilder);
 
-#if NETCORE  || NET8_0
+#if NETCORE  || NET10_0
         return typeBuilder.CreateTypeInfo().AsType();
 #else
         return typeBuilder.CreateType();

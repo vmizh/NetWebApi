@@ -509,7 +509,7 @@ public static class StreamExtensions
     {
         ms.Position = 0;
 
-#if NETCORE  || NET8_0
+#if NETCORE  || NET10_0
         if (ms.TryGetBuffer(out var buffer))
         {
             return encoding.GetString(buffer.Array, buffer.Offset, buffer.Count);
@@ -533,7 +533,7 @@ public static class StreamExtensions
 
     public static ReadOnlyMemory<byte> GetBufferAsMemory(this MemoryStream ms)
     {
-#if NETCORE  || NET8_0
+#if NETCORE  || NET10_0
         if (ms.TryGetBuffer(out var buffer))
         {
             return new ReadOnlyMemory<byte>(buffer.Array, buffer.Offset, buffer.Count);
@@ -555,7 +555,7 @@ public static class StreamExtensions
 
     public static ReadOnlySpan<byte> GetBufferAsSpan(this MemoryStream ms)
     {
-#if NETCORE  || NET8_0
+#if NETCORE  || NET10_0
         if (ms.TryGetBuffer(out var buffer))
         {
             return new ReadOnlySpan<byte>(buffer.Array, buffer.Offset, buffer.Count);
@@ -577,7 +577,7 @@ public static class StreamExtensions
 
     public static byte[] GetBufferAsBytes(this MemoryStream ms)
     {
-#if NETCORE  || NET8_0
+#if NETCORE  || NET10_0
         if (ms.TryGetBuffer(out var buffer))
         {
             return buffer.Array;
@@ -606,7 +606,7 @@ public static class StreamExtensions
     {
         ms.Position = 0;
 
-#if NETCORE  || NET8_0
+#if NETCORE  || NET10_0
         if (ms.TryGetBuffer(out var buffer))
         {
             return encoding.GetString(buffer.Array, buffer.Offset, buffer.Count).InTask();
@@ -668,7 +668,7 @@ public static class StreamExtensions
     public static async Task WriteToAsync(this MemoryStream stream, Stream output, Encoding encoding,
         CancellationToken token)
     {
-#if NETCORE  || NET8_0
+#if NETCORE  || NET10_0
         if (stream.TryGetBuffer(out var buffer))
         {
             await output.WriteAsync(buffer.Array, buffer.Offset, buffer.Count, token).ConfigAwait();

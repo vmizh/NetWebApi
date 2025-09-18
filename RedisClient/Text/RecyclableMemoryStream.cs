@@ -44,7 +44,7 @@ public static class MemoryStreamFactory
     }
 }
 
-#if !NETCORE && !NET8_0
+#if !NETCORE && !NET10_0
 public enum EventLevel
 {
     LogAlways = 0,
@@ -968,7 +968,7 @@ public partial class RecyclableMemoryStreamManager
         return GetStream(Guid.NewGuid(), tag, buffer, offset, count);
     }
 
-#if (NETCORE  || NET8_0) && !NETSTANDARD2_0
+#if (NETCORE  || NET10_0) && !NETSTANDARD2_0
     /// <summary>
     /// Retrieve a new MemoryStream object with the given tag and with contents copied from the provided
     /// buffer. The provided buffer is not wrapped or used after construction.
@@ -1596,7 +1596,7 @@ public sealed class RecyclableMemoryStream : MemoryStream
         return amountRead;
     }
 
-#if !NETSTANDARD2_0 && (NETCORE  && NET8_0)
+#if !NETSTANDARD2_0 && (NETCORE  && NET10_0)
     /// <summary>
     /// Reads from the current position into the provided buffer
     /// </summary>
@@ -1687,7 +1687,7 @@ public sealed class RecyclableMemoryStream : MemoryStream
         length = Math.Max(position, length);
     }
 
-#if !NETSTANDARD2_0 && (NETCORE || NET8_0)
+#if !NETSTANDARD2_0 && (NETCORE || NET10_0)
     /// <summary>
     /// Writes the buffer to the stream
     /// </summary>

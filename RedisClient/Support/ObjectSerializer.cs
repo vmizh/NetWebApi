@@ -1,5 +1,5 @@
 ﻿using System.IO;
-#if !NETCORE && !NET8_0
+#if !NETCORE && !NET10_0
 using System.Runtime.Serialization.Formatters.Binary;
 #endif
 
@@ -11,7 +11,7 @@ namespace ServiceStack.Redis.Support
 	/// </summary>
 	public class ObjectSerializer : ISerializer
 	{
-#if !NETCORE && !NET8_0
+#if !NETCORE && !NET10_0 
 		protected readonly BinaryFormatter bf = new BinaryFormatter();
 #endif 
 
@@ -23,7 +23,7 @@ namespace ServiceStack.Redis.Support
 		/// <returns></returns>
 		public virtual byte[] Serialize(object value)
 		{
-#if NETCORE || NET8_0
+#if NETCORE || NET10_0
 			return null;
 #else
 			if (value == null)
@@ -42,7 +42,7 @@ namespace ServiceStack.Redis.Support
 		/// <returns></returns>
 		public virtual object Deserialize(byte[] someBytes)
 		{
-#if NETCORE || NET8_0
+#if NETCORE || NET10_0
 			return null;
 #else
 			if (someBytes == null)

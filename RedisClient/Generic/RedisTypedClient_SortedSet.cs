@@ -53,7 +53,7 @@ namespace ServiceStack.Redis.Generic
 
         private static IDictionary<T, double> CreateGenericMap(IDictionary<string, double> map)
         {
-            var genericMap = new OrderedDictionary<T, double>();
+            var genericMap = new Support.OrderedDictionary<T, double>();
             foreach (var entry in map)
             {
                 genericMap[DeserializeFromString(entry.Key)] = entry.Value;

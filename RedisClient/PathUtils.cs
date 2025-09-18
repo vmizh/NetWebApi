@@ -62,7 +62,7 @@ public static class PathUtils
     public static string MapHostAbsolutePath(this string relativePath)
     {
         var sep = PclExport.Instance.DirSep;
-#if !NETCORE && !NET8_0
+#if !NETCORE && !NET10_0
             return PclExport.Instance.MapAbsolutePath(relativePath, $"{sep}..");
 #else
         return PclExport.Instance.MapAbsolutePath(relativePath, $"{sep}..{sep}..{sep}..");

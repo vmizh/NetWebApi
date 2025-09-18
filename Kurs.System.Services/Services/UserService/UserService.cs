@@ -5,6 +5,7 @@ using Common.Services;
 using Data.SqlServer.KursSystem.Entities;
 using Data.SqlServer.KursSystem.Repositories.UserRepository;
 using DTO.Common;
+using DTO.KursSystemDTO.KursMenu;
 using DTO.KursSystemDTO.User;
 using Mapster;
 using Microsoft.AspNetCore.Http;
@@ -19,7 +20,10 @@ public class UserService(IBaseRepository<User> repository, IUserRepository userR
     protected override string RepositoryName => "Репозиторий пользователей Курса";
 }
 
-public class UserDtoService(IBaseRepository<User> repository, IUserRepository userRepository)
+public class UserDtoService(
+    IBaseRepository<User> repository,
+    IUserRepository userRepository,
+    IBaseRepository<KursMenuItem> menuRepository)
     : BaseDtoService<User, UserDto>(repository), IUserDtoService
 {
     protected override string RepositoryName => "Репозиторий пользователей Курса";
@@ -52,23 +56,58 @@ public class UserDtoService(IBaseRepository<User> repository, IUserRepository us
         }
     }
 
-    public async Task<IResult> GetFullByIdAsync(Guid id)
+    public async Task<IResult> GetByNameFullAsync(string name, Guid dbId)
     {
-        Log.Logger.Information($"{RepositoryName}. Получение пользователя с информацией доступа к меню Курса'{id})'");
+        Log.Logger.Information($"{RepositoryName}. Получение пользователя с правами на меню'{name})'");
         var response = new APIResponse();
         try
         {
-            if (id != Guid.Empty)
+            if (!string.IsNullOrWhiteSpace(name))
             {
-                var item = await repository.GetByIdAsync(new IdentityDto(id));
-                if (item is not null)
+                var user = await userRepository.GetByName(name);
+                if (user != null)
                 {
+                    var res = user.Adapt<UserWithMenuDto>();
+                    foreach (var menu in (await userRepository.GetRightsMenu(res.Id, dbId))!)
+                        res.RightsMenu.Add(menu.Adapt<KursMenuItemDto>());
+                    foreach (var menu in (await userRepository.GetFavoritesMenu(res.Id, dbId))!)
+                        res.FavoritesMenu.Add(menu.Adapt<KursMenuItemDto>());
                     response.IsSuccess = true;
                     response.StatusCode = HttpStatusCode.OK;
-                    var res = item.Adapt<UserWithMenuDto>();
-                    response.Result = res; 
+                    response.Result = res;
                     return Results.Ok(response);
                 }
+
+                response.IsSuccess = true;
+                response.StatusCode = HttpStatusCode.NoContent;
+                return Results.NoContent();
+            }
+        }
+        catch (Exception ex)
+        {
+            return APIResponse.ReturnError(response, ex, Log.Logger);
+        }
+
+        return Results.NoContent();
+    }
+
+    public async Task<IResult> GetFullByIdAsync(Guid userId, Guid dbId)
+    {
+        Log.Logger.Information(
+            $"{RepositoryName}. Получение пользователя с информацией доступа к меню Курса'{userId})'");
+        var response = new APIResponse();
+        try
+        {
+            var user = await repository.GetByIdAsync(new IdentityDto(userId));
+            if (user != null)
+            {
+                var res = user.Adapt<UserWithMenuDto>();
+                foreach (var menu in (await userRepository.GetRightsMenu(res.Id, dbId))!)
+                    res.RightsMenu.Add(menu.Adapt<KursMenuItemDto>());
+                response.IsSuccess = true;
+                response.StatusCode = HttpStatusCode.OK;
+                response.Result = res;
+                return Results.Ok(response);
             }
 
             response.IsSuccess = true;

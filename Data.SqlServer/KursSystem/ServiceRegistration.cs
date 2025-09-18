@@ -1,7 +1,7 @@
 ﻿using Common.Repositories;
+using Data.SqlServer.Base;
 using Data.SqlServer.KursSystem.Context;
 using Data.SqlServer.KursSystem.Entities;
-using Data.SqlServer.KursSystem.Repositories;
 using Data.SqlServer.KursSystem.Repositories.DataSourceRepository;
 using Data.SqlServer.KursSystem.Repositories.KursMenu;
 using Data.SqlServer.KursSystem.Repositories.UserRepository;

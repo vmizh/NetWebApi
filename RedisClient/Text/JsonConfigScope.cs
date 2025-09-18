@@ -12,7 +12,7 @@ public sealed class JsConfigScope : Config, IDisposable
     bool disposed;
     readonly JsConfigScope parent;
 
-#if NETCORE  || NET8_0  
+#if NETCORE  || NET10_0  
     private static AsyncLocal<JsConfigScope> head = new();
 #else
         [ThreadStatic] private static JsConfigScope head;
@@ -22,7 +22,7 @@ public sealed class JsConfigScope : Config, IDisposable
     {
         PclExport.Instance.BeginThreadAffinity();
 
-#if NETCORE  || NET8_0 
+#if NETCORE  || NET10_0 
         parent = head.Value;
         head.Value = this;
 #else
@@ -32,7 +32,7 @@ public sealed class JsConfigScope : Config, IDisposable
     }
 
     internal static JsConfigScope Current => 
-#if NETCORE  || NET8_0   
+#if NETCORE  || NET10_0   
         head.Value;
 #else
             head;
@@ -43,7 +43,7 @@ public sealed class JsConfigScope : Config, IDisposable
         if (!disposed)
         {
             disposed = true;
-#if NETCORE   || NET8_0      
+#if NETCORE   || NET10_0      
             head.Value = parent;
 #else
                 head = parent;

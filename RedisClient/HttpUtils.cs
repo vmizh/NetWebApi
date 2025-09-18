@@ -14,7 +14,7 @@ namespace ServiceStack;
 public static partial class HttpUtils
 {
     public static string UserAgent = "ServiceStack.Text" +
-#if NET6_0_OR_GREATER && NET8_0
+#if NET6_0_OR_GREATER && NET10_0 
                                      "/net6"
 #elif NETSTANDARD2_0
         "/std2.0"

@@ -212,7 +212,7 @@ namespace ServiceStack.Redis
 
         private static IDictionary<string, double> CreateSortedScoreMap(byte[][] multiDataList)
         {
-            var map = new OrderedDictionary<string, double>();
+            var map = new Support.OrderedDictionary<string, double>();
 
             for (var i = 0; i < multiDataList.Length; i += 2)
             {

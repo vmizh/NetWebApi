@@ -1,5 +1,5 @@
 ﻿#define NETFX
-#if NETFX || ((NETCORE || NET8_0)  && !NETSTANDARD2_0)
+#if NETFX || ((NETCORE || NET10_0)  && !NETSTANDARD2_0)
 using System;
 using System.Reflection;
 using System.Reflection.Emit;

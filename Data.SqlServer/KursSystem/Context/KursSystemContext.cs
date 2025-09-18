@@ -1,4 +1,5 @@
 ﻿using Data.SqlServer.KursSystem.Entities;
+using EntityFramework.Exceptions.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Version = Data.SqlServer.KursSystem.Entities.Version;
 
@@ -61,7 +62,7 @@ public partial class KursSystemContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-
+        optionsBuilder.UseExceptionProcessor();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

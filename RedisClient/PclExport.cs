@@ -30,7 +30,7 @@ public abstract class PclExport
       new NetFxPclExport()
 #elif NETSTANDARD2_0
       new NetStandardPclExport()
-#elif NETCORE || NET6_0_OR_GREATER || NET8_0
+#elif NETCORE || NET6_0_OR_GREATER || NET10_0
       new Net6PclExport()
 #endif
     ;

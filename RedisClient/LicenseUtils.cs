@@ -448,7 +448,7 @@ public static class LicenseUtils
             var rsa = RSA.Create();
             rsa.FromXml(LicensePublicKey);
 
-#if !NETCORE && !NET8_0
+#if !NETCORE && !NET10_0
                 var verified = ((RSACryptoServiceProvider)rsa)
                     .VerifyData(keyText.ToUtf8Bytes(), "SHA256", Convert.FromBase64String(keySign));
 #else
@@ -718,7 +718,7 @@ public static class LicenseUtils
 
     public static LicenseKey VerifyLicenseKeyText(string licenseKeyText)
     {
-#if NETFX || NETCORE || NET8_0
+#if NETFX || NETCORE || NET10_0
         LicenseKey key;
         try
         {
@@ -825,7 +825,7 @@ public static class LicenseUtils
             nameof(SHA256) => SHA256.Create(),
             nameof(SHA384) => SHA384.Create(),
             nameof(SHA512) => SHA512.Create(),
-#if NET8_0_OR_GREATER            
+#if NET10_0_OR_GREATER            
             nameof(SHA3_256) => SHA3_256.Create(),
             nameof(SHA3_512) => SHA3_512.Create(),
 #endif

@@ -14,7 +14,7 @@ public static class Env
         if (PclExport.Instance == null)
             throw new ArgumentException("PclExport.Instance needs to be initialized");
 
-#if NETCORE  || NET8_0
+#if NETCORE  || NET10_0
             IsNetStandard = true;
             try
             {
@@ -61,7 +61,7 @@ public static class Env
         SupportsDynamic = true;
 #endif
 
-#if NETCORE || NET8_0
+#if NETCORE || NET10_0
             IsNetStandard = false;
             IsNetCore = true;
             SupportsDynamic = true;
@@ -231,7 +231,7 @@ public static class Env
         set => referenceAssemblyPath = value;
     }
 
-#if NETCORE || NET8_0
+#if NETCORE || NET10_0
         private static bool IsRunningAsUwp()
         {
             try
@@ -332,7 +332,7 @@ public static class Env
     /// Only .ConfigAwait(false) in .NET Core as loses HttpContext.Current in NETFX/ASP.NET
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NETCORE || NET8_0
+#if NETCORE || NET10_0
         public static ConfiguredTaskAwaitable ConfigAwaitNetCore(this Task task) => task.ConfigureAwait(false);
 #else
     public static Task ConfigAwaitNetCore(this Task task) => task;
@@ -342,13 +342,13 @@ public static class Env
     /// Only .ConfigAwait(false) in .NET Core as loses HttpContext.Current in NETFX/ASP.NET
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NETCORE  || NET8_0
+#if NETCORE  || NET10_0
         public static ConfiguredTaskAwaitable<T> ConfigAwaitNetCore<T>(this Task<T> task) => task.ConfigureAwait(false);
 #else
     public static Task<T> ConfigAwaitNetCore<T>(this Task<T> task) => task;
 #endif
 
-#if NETCORE || NET8_0
+#if NETCORE || NET10_0
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ConfiguredValueTaskAwaitable ConfigAwait(this ValueTask task) => 
             task.ConfigureAwait(ContinueOnCapturedContext);
