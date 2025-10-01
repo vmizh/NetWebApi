@@ -27,3 +27,17 @@ public interface IBaseDtoService<T,D>
     Task<IResult> GetByIdAsync(IBaseIdentity id);
     Task<IResult> GetAllAsync();
 }
+
+public interface IBaseDbDtoService<T,D> 
+    where T : class
+    where D : class
+{
+    Task<IResult> CreateAsync(D item, Guid dbId);
+    Task<IResult> CreateManyAsync(IEnumerable<D> items, Guid dbId);
+    Task<IResult> UpdateAsync(D item, Guid dbId);
+    Task<IResult> UpdateManyAsync(IEnumerable<D> items, Guid dbId);
+    Task<IResult> DeleteAsync(IBaseIdentity id, Guid dbId);
+    Task<IResult> DeleteManyAsync(IEnumerable<IBaseIdentity> ids, Guid dbId);
+    Task<IResult> GetByIdAsync(IBaseIdentity id, Guid dbId);
+    Task<IResult> GetAllAsync(Guid dbId);
+}

@@ -5,14 +5,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.SqlServer.KursSystem.Repositories.KursMenu;
 
-public class KursMenuRepository(KursSystemContext dbContext)
-    : BaseRepository<KursMenuItem>(dbContext), IKursMenuRepository
+public class KursMenuRepository(KursSystemContext dbCtx)
+    : BaseRepository<KursMenuItem>(dbCtx), IKursMenuRepository
 {
+    private readonly KursSystemContext dbCtx = dbCtx;
     public async Task CreateGroupMenu(KursMenuGroup item)
     {
         var id = item.Id;
         if (id == 0)
-            id = await dbContext.KursMenuGroups.MaxAsync(_ => _.Id) + 1;
+            id = await dbCtx.KursMenuGroups.MaxAsync(_ => _.Id) + 1;
         item.Id = id;
         var sql = $@"SET IDENTITY_INSERT KursMenuGroup ON;
                     INSERT INTO dbo.KursMenuGroup
@@ -34,38 +35,34 @@ public class KursMenuRepository(KursSystemContext dbContext)
                      ,NULL
                     );
                     SET IDENTITY_INSERT KursMenuGroup OFF;";
-        await dbContext.Database.ExecuteSqlRawAsync(sql);
-        //await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT KursMenuGroup ON;");
-        //await dbContext.KursMenuGroups.AddAsync(item);
-        //await dbContext.SaveChangesAsync();
-        //await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT KursMenuGroup OFF;");
+        await dbCtx.Database.ExecuteSqlRawAsync(sql);
     }
 
     public async Task UpdateGroupMenu(KursMenuGroup item)
     {
-        dbContext.KursMenuGroups.Update(item);
-        await dbContext.SaveChangesAsync();
+        dbCtx.KursMenuGroups.Update(item);
+        await dbCtx.SaveChangesAsync();
 
     }
 
     public async Task DeleteGroupMenu(int groupId)
     {
-        var old = await dbContext.KursMenuGroups.FirstOrDefaultAsync(_ => _.Id == groupId);
+        var old = await dbCtx.KursMenuGroups.FirstOrDefaultAsync(_ => _.Id == groupId);
         if (old != null)
         {
-            dbContext.KursMenuGroups.Remove(old);
-            await dbContext.SaveChangesAsync();
+            dbCtx.KursMenuGroups.Remove(old);
+            await dbCtx.SaveChangesAsync();
         }
     }
 
 
     public async Task<KursMenuGroup?> GetMenuGroup(int id)
     {
-        return await dbContext.KursMenuGroups.FirstOrDefaultAsync(_ => _.Id == id);
+        return await dbCtx.KursMenuGroups.FirstOrDefaultAsync(_ => _.Id == id);
     }
 
     public async Task<IEnumerable<KursMenuGroup>> GetMenuGroups()
     {
-        return await dbContext.KursMenuGroups.ToListAsync();
+        return await dbCtx.KursMenuGroups.ToListAsync();
     }
 }

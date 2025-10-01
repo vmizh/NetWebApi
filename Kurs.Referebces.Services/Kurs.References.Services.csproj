@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Helper\Common.Helper.csproj" />
+    <ProjectReference Include="..\Common.Services\Common.Services.csproj" />
+    <ProjectReference Include="..\Data.SqlServer\Data.SqlServer.csproj" />
+    <ProjectReference Include="..\DTO\DTO.csproj" />
+  </ItemGroup>
+
+</Project>

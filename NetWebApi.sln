@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kurs.ReferencesAPI", "Kurs.ReferencesAPI\Kurs.ReferencesAPI.csproj", "{EEDB1E93-BDCA-5388-6B67-ACC4B3364309}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kurs.References.Services", "Kurs.Referebces.Services\Kurs.References.Services.csproj", "{1275AE87-7565-4E7F-BAD5-187E7C96E9F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{EEDB1E93-BDCA-5388-6B67-ACC4B3364309}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEDB1E93-BDCA-5388-6B67-ACC4B3364309}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEDB1E93-BDCA-5388-6B67-ACC4B3364309}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1275AE87-7565-4E7F-BAD5-187E7C96E9F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1275AE87-7565-4E7F-BAD5-187E7C96E9F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1275AE87-7565-4E7F-BAD5-187E7C96E9F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1275AE87-7565-4E7F-BAD5-187E7C96E9F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

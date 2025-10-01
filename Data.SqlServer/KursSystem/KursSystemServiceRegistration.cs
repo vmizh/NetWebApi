@@ -11,9 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Data.SqlServer.KursSystem;
 
-public static class ServiceRegistration
+public static class KursSystemServiceRegistration
 {
-    public static IServiceCollection AddDataDependencies(this IServiceCollection services,
+    public static IServiceCollection AddKursSystemDataDependencies(this IServiceCollection services,
         IConfiguration configuration)
     {
         services.AddDbContext<KursSystemContext>(opt =>

@@ -19,7 +19,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddSwaggerGen();
-builder.Services.AddDataDependencies(builder.Configuration);
+builder.Services.AddKursSystemDataDependencies(builder.Configuration);
 builder.Services.AddServiceDependencies(builder.Configuration);
 
 var app = builder.Build();

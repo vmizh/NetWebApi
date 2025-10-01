@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.SqlServer.KursSystem.Repositories.UserRepository;
 
-public class UserRepository(KursSystemContext dbContext)
-    : BaseRepository<User>(dbContext), IUserRepository
+public class UserRepository(KursSystemContext myDbContext)
+    : BaseRepository<User>(myDbContext: myDbContext), IUserRepository
 {
-    private readonly KursSystemContext myDbContext = dbContext;
+    private readonly KursSystemContext myDbContext = myDbContext;
 
     public async Task<User?> GetByName(string name)
     {
@@ -63,7 +63,7 @@ public class UserRepository(KursSystemContext dbContext)
         var res = new List<KursMenuGroup>();
         foreach (var menu in menus)
         {
-            var grp = await dbContext.KursMenuGroups.FirstOrDefaultAsync(_ => _.Id == menu.GroupId);
+            var grp = await myDbContext.KursMenuGroups.FirstOrDefaultAsync(_ => _.Id == menu.GroupId);
             if (grp == null) continue;
             res.Add(grp);
         }

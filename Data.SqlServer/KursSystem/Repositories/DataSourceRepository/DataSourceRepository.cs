@@ -4,7 +4,7 @@ using Data.SqlServer.KursSystem.Entities;
 
 namespace Data.SqlServer.KursSystem.Repositories.DataSourceRepository;
 
-public class DataSourceRepository(KursSystemContext dbContext)
-    : BaseRepository<DataSource>(dbContext), IDataSourceRepository
+public class DataSourceRepository(KursSystemContext myDbContext)
+    : BaseRepository<DataSource>(myDbContext), IDataSourceRepository
 {
 }

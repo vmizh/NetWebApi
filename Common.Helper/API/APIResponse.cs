@@ -12,7 +12,7 @@ public class APIResponse
 
     public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.BadRequest;
 
-    public List<string> ErrorMessages { set; get; } = new List<string>();
+    public List<string> ErrorMessages { set; get; } = [];
 
     public static IResult ReturnError(APIResponse response, Exception ex, ILogger _logger,
         HttpStatusCode statusCode = HttpStatusCode.InternalServerError)
@@ -32,6 +32,4 @@ public class APIResponse
         _logger.Error(errText.ToString());
         return Results.BadRequest(response);
     }
-
-    
 }

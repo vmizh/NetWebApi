@@ -26,6 +26,7 @@ public class UserDtoService(
     IBaseRepository<KursMenuItem> menuRepository)
     : BaseDtoService<User, UserDto>(repository), IUserDtoService
 {
+    private readonly IBaseRepository<User> repository = repository;
     protected override string RepositoryName => "Репозиторий пользователей Курса";
 
     public async Task<IResult> GetByNameAsync(string name)

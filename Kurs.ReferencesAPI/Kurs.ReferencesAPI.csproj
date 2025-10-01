@@ -6,4 +6,18 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.9" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Services\Common.Services.csproj" />
+    <ProjectReference Include="..\Data.SqlServer\Data.SqlServer.csproj" />
+    <ProjectReference Include="..\Kurs.Referebces.Services\Kurs.References.Services.csproj" />
+  </ItemGroup>
+
 </Project>
