@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Common.Helper.Interfaces.Identity;
 
 namespace Data.SqlServer.KursReferences.Entities;
 
 [SuppressMessage("ReSharper", "PropertyCanBeMadeInitOnly.Global")]
-public class NomenklMain
+public class NomenklMain : IGuidIdentity
 {
     public Guid Id { get; set; }
 
@@ -53,4 +54,9 @@ public class NomenklMain
     public virtual SD_119 TypeDCNavigation { get; set; } = null!;
 
     public virtual SD_175 UnitDCNavigation { get; set; } = null!;
+    object IBaseIdentity.Id
+    {
+        get => Id;
+        set => Id = (Guid)value;
+    }
 }

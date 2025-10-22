@@ -1,6 +1,8 @@
-﻿namespace Data.SqlServer.KursReferences.Entities;
+﻿using Common.Helper.Interfaces.Identity;
 
-public class COUNTRY
+namespace Data.SqlServer.KursReferences.Entities;
+
+public class COUNTRY : IGuidIdentity
 {
     public string ID { get; set; } = null!;
 
@@ -25,4 +27,15 @@ public class COUNTRY
     public byte[]? SMALL_FLAG { get; set; }
 
     public DateTime? UpdateDate { get; set; }
+    object IBaseIdentity.Id
+    {
+        get => Id;
+        set => Id = Guid.Parse((string)value);
+    }
+
+    public Guid Id
+    {
+        get => string.IsNullOrWhiteSpace(ID) ? Guid.Empty : Guid.Parse(ID);
+        set => ID = value.ToString();
+    }
 }

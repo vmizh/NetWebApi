@@ -11,6 +11,6 @@ public interface IKursReferencesBaseRepository<T>
     Task DeleteAsync(Guid dbId, IBaseIdentity id);
     Task DeleteManyAsync(Guid dbId, IEnumerable<IBaseIdentity> ids);
     Task<T?> GetByIdAsync(Guid dbId, IBaseIdentity id);
-    Task<IEnumerable<T>> GetAllAsync(Guid dbId, CancellationToken cancelToken); 
+    Task<IEnumerable<T>> GetAllAsync(Guid dbId, CancellationToken cancelToken);
     string GetDbName(Guid id);
 }

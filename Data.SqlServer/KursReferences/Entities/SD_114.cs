@@ -1,7 +1,10 @@
-﻿namespace Data.SqlServer.KursReferences.Entities;
+﻿using Common.Helper.Interfaces.Identity;
 
-public class SD_114
+namespace Data.SqlServer.KursReferences.Entities;
+
+public class SD_114 : IDocCodeIdentity
 {
+    public Guid Id { get; set; }
     public decimal DOC_CODE { get; set; }
 
     public int BA_RASH_ACC_CODE { get; set; }
@@ -43,4 +46,9 @@ public class SD_114
     public virtual SD_40? BA_CENTR_OTV_DCNavigation { get; set; }
 
     public virtual SD_301? CurrencyDCNavigation { get; set; }
+    object IBaseIdentity.Id
+    {
+        get => Id;
+        set => Id = (Guid)value;
+    }
 }

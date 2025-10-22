@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Common.Helper.Interfaces.Identity;
 
 namespace Data.SqlServer.KursReferences.Entities;
 
 [SuppressMessage("ReSharper", "PropertyCanBeMadeInitOnly.Global")]
-public class Project
+public class Project : IGuidIdentity
 {
     public Guid Id { get; set; }
 
@@ -32,4 +33,9 @@ public class Project
     public virtual SD_2? ManagerDCNavigation { get; set; }
 
     public virtual Project? Parent { get; set; }
+    object IBaseIdentity.Id
+    {
+        get => Id;
+        set => Id = (Guid)value;
+    }
 }

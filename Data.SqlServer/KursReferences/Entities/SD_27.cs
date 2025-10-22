@@ -1,6 +1,8 @@
-﻿namespace Data.SqlServer.KursReferences.Entities;
+﻿using Common.Helper.Interfaces.Identity;
 
-public class SD_27
+namespace Data.SqlServer.KursReferences.Entities;
+
+public class SD_27 : IDocCodeIdentity
 {
     public decimal DOC_CODE { get; set; }
 
@@ -41,4 +43,9 @@ public class SD_27
     public virtual SD_27? Parent { get; set; }
 
     public virtual SD_23 SKL_REGION_DCNavigation { get; set; } = null!;
+    object IBaseIdentity.Id
+    {
+        get => Id;
+        set => Id = (Guid)value;
+    }
 }

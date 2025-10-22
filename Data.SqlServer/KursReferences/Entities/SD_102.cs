@@ -1,7 +1,10 @@
-﻿namespace Data.SqlServer.KursReferences.Entities;
+﻿using Common.Helper.Interfaces.Identity;
 
-public class SD_102
+namespace Data.SqlServer.KursReferences.Entities;
+
+public class SD_102 : IDocCodeIdentity
 {
+    public Guid Id { get; set; }
     public decimal DOC_CODE { get; set; }
 
     public string TD_NAME { get; set; } = null!;
@@ -21,4 +24,9 @@ public class SD_102
     public short? TD_DAVLENCH_DOG { get; set; }
 
     public DateTime? UpdateDate { get; set; }
+    object IBaseIdentity.Id
+    {
+        get => Id;
+        set => Id = (Guid)value;
+    }
 }

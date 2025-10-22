@@ -1,9 +1,11 @@
-﻿namespace Data.SqlServer.KursReferences.Entities;
+﻿using Common.Helper.Interfaces.Identity;
+
+namespace Data.SqlServer.KursReferences.Entities;
 
 /// <summary>
 ///     Status
 /// </summary>
-public class SD_83
+public class SD_83 : IDocCodeIdentity
 {
     public decimal DOC_CODE { get; set; }
 
@@ -166,4 +168,9 @@ public class SD_83
     public virtual SD_83? NOM_TARA_DCNavigation { get; set; }
 
     public virtual SD_119? NOM_TYPE_DCNavigation { get; set; }
+    object IBaseIdentity.Id
+    {
+        get => Id;
+        set => Id = (Guid)value;
+    }
 }

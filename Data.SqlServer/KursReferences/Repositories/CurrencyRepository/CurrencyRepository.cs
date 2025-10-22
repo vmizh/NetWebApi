@@ -7,8 +7,6 @@ namespace Data.SqlServer.KursReferences.Repositories.CurrencyRepository;
 
 [SuppressMessage("ReSharper", "ConvertTypeCheckPatternToNullCheck")]
 public class CurrencyRepository(IKursReferenceContextRepository repository)
-    : KursReferencesBaseRepository<SD_301>(contextRepository: repository), ICurrencyRepository
+    : KursReferencesBaseRepository<SD_301>(repository), ICurrencyRepository
 {
-    
-   
 }

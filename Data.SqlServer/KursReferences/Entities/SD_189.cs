@@ -1,7 +1,10 @@
-﻿namespace Data.SqlServer.KursReferences.Entities;
+﻿using Common.Helper.Interfaces.Identity;
 
-public class SD_189
+namespace Data.SqlServer.KursReferences.Entities;
+
+public class SD_189 : IDocCodeIdentity
 {
+    public Guid Id { get; set; }
     public decimal DOC_CODE { get; set; }
 
     public string OOT_NAME { get; set; } = null!;
@@ -15,4 +18,9 @@ public class SD_189
     public DateTime? UpdateDate { get; set; }
 
     public virtual SD_179? OOT_USL_OPL_DEF_DCNavigation { get; set; }
+    object IBaseIdentity.Id
+    {
+        get => Id;
+        set => Id = (Guid)value;
+    }
 }

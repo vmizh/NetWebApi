@@ -1,7 +1,11 @@
-﻿namespace Data.SqlServer.KursReferences.Entities;
+﻿using Common.Helper.Interfaces.Identity;
 
-public class SD_23
+namespace Data.SqlServer.KursReferences.Entities;
+
+public class SD_23 : IDocCodeIdentity
 {
+    public Guid Id { get; set; }
+
     public decimal DOC_CODE { get; set; }
 
     public string REG_NAME { get; set; } = null!;
@@ -19,4 +23,10 @@ public class SD_23
     public virtual ICollection<SD_27> SD_27 { get; set; } = new List<SD_27>();
 
     public virtual ICollection<SD_43> SD_43 { get; set; } = new List<SD_43>();
+
+    object IBaseIdentity.Id
+    {
+        get => Id;
+        set => Id = (Guid)value;
+    }
 }

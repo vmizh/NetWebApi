@@ -1,8 +1,16 @@
-﻿namespace Data.SqlServer.KursReferences.Entities;
+﻿using Common.Helper.Interfaces.Identity;
 
-public class SD_2
+namespace Data.SqlServer.KursReferences.Entities;
+
+public class SD_2 : IDocCodeIdentity
 {
     public int TABELNUMBER { get; set; }
+
+    public Guid Id
+    {
+        get => string.IsNullOrWhiteSpace(ID) ? Guid.Empty : Guid.Parse(ID);
+        set => ID = ID = value.ToString();
+    }
 
     public decimal DOC_CODE { get; set; }
 
@@ -43,4 +51,9 @@ public class SD_2
     public virtual ICollection<SD_43> SD_43 { get; set; } = new List<SD_43>();
 
     public virtual SD_301? crs_dcNavigation { get; set; }
+    object IBaseIdentity.Id
+    {
+        get => Id;
+        set => Id = (Guid)value;
+    }
 }

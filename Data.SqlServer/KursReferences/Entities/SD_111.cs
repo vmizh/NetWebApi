@@ -1,6 +1,8 @@
-﻿namespace Data.SqlServer.KursReferences.Entities;
+﻿using Common.Helper.Interfaces.Identity;
 
-public class SD_111
+namespace Data.SqlServer.KursReferences.Entities;
+
+public class SD_111 : IDocCodeIdentity
 {
     public decimal DOC_CODE { get; set; }
 
@@ -9,4 +11,10 @@ public class SD_111
     public bool IsCurrencyConvert { get; set; }
 
     public DateTime? UpdateDate { get; set; }
+    public Guid Id { get; set; }
+    object IBaseIdentity.Id
+    {
+        get => Id;
+        set => Id = (Guid)value;
+    }
 }
