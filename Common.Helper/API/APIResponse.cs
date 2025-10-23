@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Text;
+using Common.Helper.Extensions;
 using Microsoft.AspNetCore.Http;
 using Serilog;
 
@@ -9,6 +10,27 @@ public class APIResponse
 {
     public bool IsSuccess { get; set; }
     public object? Result { get; set; }
+
+    public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.BadRequest;
+
+    public List<string> ErrorMessages { set; get; } = [];
+
+    public static IResult ReturnError(APIResponse response, Exception ex, ILogger _logger,
+        HttpStatusCode statusCode = HttpStatusCode.InternalServerError)
+    {
+        response.IsSuccess = false;
+        response.StatusCode = statusCode;
+        response.ErrorMessages = ex.ErrorTextList();
+        _logger.Error(ex.ErrorText());
+        return Results.BadRequest(response);
+    }
+}
+
+
+public class APIResponse<T> where T: class
+{
+    public bool IsSuccess { get; set; }
+    public T? Result { get; set; }
 
     public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.BadRequest;
 

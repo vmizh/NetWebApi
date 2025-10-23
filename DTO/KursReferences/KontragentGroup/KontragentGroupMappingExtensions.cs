@@ -11,7 +11,8 @@ public static class KontragentGroupMappingExtensions
             Id = entity.EG_ID,
             ParentId = entity.EG_PARENT_ID,
             Name = entity.EG_NAME,
-            UpdateDate = entity.UpdateDate
+            UpdateDate = entity.UpdateDate,
+            GuidId = entity.Id
         };
     }
 
@@ -19,6 +20,7 @@ public static class KontragentGroupMappingExtensions
     {
         return new KontragentGroupFullDto
         {
+            GuidId = entity.Id,
             Id = entity.EG_ID,
             ParentId = entity.EG_PARENT_ID,
             Name = entity.EG_NAME,

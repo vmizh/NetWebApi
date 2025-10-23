@@ -8,6 +8,7 @@ public static class SDRStateMappingExtensions
     {
         return new SDRStateDto
         {
+            Id = entity.Id,
             DocCode = entity.DOC_CODE,
             Name = entity.SZ_NAME,
             ParentDC = entity.SZ_PARENT_DC,
@@ -21,6 +22,7 @@ public static class SDRStateMappingExtensions
     {
         return new SD_99
         {
+            Id = dto.Id,
             DOC_CODE = dto.DocCode,
             SZ_NAME = dto.Name,
             SZ_SHIFR = dto.Shifr,

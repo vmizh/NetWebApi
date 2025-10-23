@@ -1,5 +1,7 @@
-﻿using Azure;
+﻿using System.Net;
+using Azure;
 using Common.Helper.API;
+using Common.Helper.Extensions;
 using Data.SqlServer.KursReferences.Entities;
 using Data.SqlServer.KursReferences.Repositories.Base;
 using Data.SqlServer.KursReferences.Repositories.CurrencyRepository;
@@ -15,17 +17,27 @@ public class CurrencyService(IKursReferencesBaseRepository<SD_301> repository, I
 
     protected override string RepositoryName => "Репозиторий справочника валют Курса";
 
-    public override async Task<APIResponse> GetAllAsync(APIRequest request, CancellationToken cancellationToken)
+    public async Task<APIResponse<List<CurrencyDto>>> GetAllFullAsync(APIRequest request,
+        CancellationToken cancellationToken)
     {
-        var res = await base.GetAllAsync(request, cancellationToken);
-        switch (res.IsSuccess)
+        var result = new APIResponse<List<CurrencyDto>>()
         {
-            case false:
-                return res;
+            IsSuccess = false
         };
-        var data = ((List<SD_301>)res.Result).Select(item => item.MapToCurrencyDto()).ToList();
-        res.Result = data;
+        try
+        {
+            var lst = await repository.GetAllAsync(request.DbId, cancellationToken);
+            var data = lst.Select(item => item.MapToCurrencyDto()).ToList();
+            result.IsSuccess = true;
+            result.Result = data;
 
-        return res;
+            return result;
+        }
+        catch (Exception ex)
+        {
+            result.ErrorMessages = ex.ErrorTextList();
+            result.StatusCode = HttpStatusCode.InternalServerError;
+            return result;
+        }
     }
 }

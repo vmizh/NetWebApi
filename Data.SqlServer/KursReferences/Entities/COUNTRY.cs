@@ -1,9 +1,11 @@
 ﻿using Common.Helper.Interfaces.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Data.SqlServer.KursReferences.Entities;
 
 public class COUNTRY : IGuidIdentity
 {
+    [Key]
     public string ID { get; set; } = null!;
 
     public string ALPHA2 { get; set; } = null!;

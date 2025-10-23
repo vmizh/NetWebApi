@@ -8,6 +8,7 @@ public static class UnitMappingExtensions
     {
         return new UnitDto
         {
+            Id = entity.Id,
             DocCode = entity.DOC_CODE,
             Name = entity.ED_IZM_NAME,
             OKEI = entity.ED_IZM_OKEI,
@@ -19,6 +20,7 @@ public static class UnitMappingExtensions
     {
         return new SD_175
         {
+            Id = dto.Id,
             DOC_CODE = dto.DocCode,
             ED_IZM_NAME = dto.Name,
             ED_IZM_OKEI = dto.OKEI,

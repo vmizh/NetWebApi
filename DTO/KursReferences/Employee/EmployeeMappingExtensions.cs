@@ -11,7 +11,7 @@ public static class EmployeeMappingExtensions
         {
             DocCode = entity.DOC_CODE,
             TabelNumber = entity.TABELNUMBER,
-            Id = string.IsNullOrEmpty(entity.ID) ? Guid.Empty : Guid.Parse(entity.ID),
+            Id = entity.Id,
             NameLast = entity.NAME_LAST,
             NameFirst = entity.NAME_FIRST,
             NameSecond = entity.NAME_SECOND,
@@ -33,7 +33,7 @@ public static class EmployeeMappingExtensions
             NAME_SECOND = dto.NameSecond,
             DELETED = (short?)(dto.IsDeleted == true ? 1 : 0),
             crs_dc = dto.Currency.DocCode,
-            ID = dto.Id.ToString(),
+            Id = dto.Id,
             UpdateDate = null,
         };
     }

@@ -10,7 +10,8 @@ public static class DeliveryConditionMappingExtensions
         {
             DocCode = entity.DOC_CODE,
             Name = entity.BUP_NAME,
-            UpdateDate = entity.UpdateDate
+            UpdateDate = entity.UpdateDate,
+            Id = entity.Id
         };
     }
 
@@ -20,7 +21,8 @@ public static class DeliveryConditionMappingExtensions
         {
             DOC_CODE = dto.DocCode,
             UpdateDate = dto.UpdateDate,
-            BUP_NAME = dto.Name
+            BUP_NAME = dto.Name,
+            Id = dto.Id
         };
     }
 }

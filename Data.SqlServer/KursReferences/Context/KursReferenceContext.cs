@@ -216,6 +216,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
         });
 
         modelBuilder.Entity<SD_103>(entity =>
@@ -231,6 +232,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
         });
 
         modelBuilder.Entity<SD_111>(entity =>
@@ -248,6 +250,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.ZACH_NAME)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
         });
 
         modelBuilder.Entity<SD_114>(entity =>
@@ -282,6 +285,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
 
             entity.HasOne(d => d.BA_BANKDCNavigation).WithMany(p => p.SD_114)
                 .HasForeignKey(d => d.BA_BANKDC)
@@ -316,6 +320,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
         });
 
         modelBuilder.Entity<SD_148>(entity =>
@@ -336,6 +341,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
         });
 
         modelBuilder.Entity<SD_175>(entity =>
@@ -363,6 +369,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
         });
 
         modelBuilder.Entity<SD_179>(entity =>
@@ -384,6 +391,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
         });
 
         modelBuilder.Entity<SD_189>(entity =>
@@ -400,6 +408,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
 
             entity.HasOne(d => d.OOT_USL_OPL_DEF_DCNavigation).WithMany(p => p.SD_189)
                 .HasForeignKey(d => d.OOT_USL_OPL_DEF_DC)
@@ -418,8 +427,6 @@ public partial class KursReferenceContext : DbContext
                 tb.HasTrigger("tu_sd_2");
             });
 
-            entity.HasIndex(e => e.ID, "IX_SD_2").IsUnique();
-
             entity.HasIndex(e => e.DOC_CODE, "IX_SD_2_ID").IsUnique();
 
             entity.HasIndex(e => e.DOC_CODE, "SD_2_DC_UIX").IsUnique();
@@ -429,10 +436,6 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.TABELNUMBER).ValueGeneratedNever();
             entity.Property(e => e.CHANGE_DATE).HasColumnType("datetime");
             entity.Property(e => e.DOC_CODE).HasColumnType("numeric(15, 0)");
-            entity.Property(e => e.ID)
-                .HasMaxLength(32)
-                .IsUnicode(false)
-                .IsFixedLength();
             entity.Property(e => e.NAME)
                 .HasMaxLength(100)
                 .IsUnicode(false);
@@ -457,6 +460,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
             entity.Property(e => e.crs_dc).HasColumnType("numeric(15, 0)");
 
             entity.HasOne(d => d.crs_dcNavigation).WithMany(p => p.SD_2)
@@ -491,6 +495,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
 
             entity.HasOne(d => d.CA_CENTR_OTV_DCNavigation).WithMany(p => p.SD_22)
                 .HasForeignKey(d => d.CA_CENTR_OTV_DC)
@@ -522,6 +527,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
 
             entity.HasOne(d => d.REG_PARENT_DCNavigation).WithMany(p => p.InverseREG_PARENT_DCNavigation)
                 .HasForeignKey(d => d.REG_PARENT_DC)
@@ -557,6 +563,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
 
             entity.HasOne(d => d.Parent).WithMany(p => p.InverseParent)
                 .HasPrincipalKey(p => p.Id)
@@ -611,6 +618,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
         });
 
         modelBuilder.Entity<SD_303>(entity =>
@@ -639,6 +647,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
 
             entity.HasOne(d => d.SHPZ_STATIA_DCNavigation).WithMany(p => p.SD_303)
                 .HasForeignKey(d => d.SHPZ_STATIA_DC)
@@ -665,6 +674,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
 
             entity.HasOne(d => d.CENT_PARENT_DCNavigation).WithMany(p => p.InverseCENT_PARENT_DCNavigation)
                 .HasForeignKey(d => d.CENT_PARENT_DC)
@@ -834,6 +844,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
         });
 
         modelBuilder.Entity<SD_50>(entity =>
@@ -858,6 +869,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
 
             entity.HasOne(d => d.PROD_PARENT_DCNavigation).WithMany(p => p.InversePROD_PARENT_DCNavigation)
                 .HasForeignKey(d => d.PROD_PARENT_DC)
@@ -880,6 +892,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
 
             entity.HasOne(d => d.TV_SHPZ_DCNavigation).WithMany(p => p.SD_77)
                 .HasForeignKey(d => d.TV_SHPZ_DC)
@@ -914,6 +927,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
 
             entity.HasOne(d => d.CAT_PARENT_DCNavigation).WithMany(p => p.InverseCAT_PARENT_DCNavigation)
                 .HasForeignKey(d => d.CAT_PARENT_DC)
@@ -1067,6 +1081,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
 
             entity.HasOne(d => d.SZ_PARENT_DCNavigation).WithMany(p => p.InverseSZ_PARENT_DCNavigation)
                 .HasForeignKey(d => d.SZ_PARENT_DC)
@@ -1086,6 +1101,7 @@ public partial class KursReferenceContext : DbContext
             entity.Property(e => e.UpdateDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Id).HasDefaultValueSql("newid()").IsUnicode();
 
             entity.HasOne(d => d.EG_PARENT).WithMany(p => p.InverseEG_PARENT)
                 .HasForeignKey(d => d.EG_PARENT_ID)

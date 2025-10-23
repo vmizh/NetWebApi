@@ -10,7 +10,8 @@ public static class NomenklProductTypeMappingExtensions
         {
             DocCode = entity.DOC_CODE,
             Name = entity.TV_NAME,
-            UpdateDate = entity.UpdateDate
+            UpdateDate = entity.UpdateDate,
+            Id = entity.Id
         };
     }
 
@@ -18,6 +19,7 @@ public static class NomenklProductTypeMappingExtensions
     {
         return new NomenklProductTypeFullDto
         {
+            Id = entity.Id,
             DocCode = entity.DOC_CODE,
             Name = entity.TV_NAME,
             UpdateDate = entity.UpdateDate,
@@ -30,6 +32,7 @@ public static class NomenklProductTypeMappingExtensions
     {
         return new SD_77
         {
+            Id = dto.Id,
             DOC_CODE = dto.DocCode,
             TV_NAME = dto.Name,
             UpdateDate = dto.UpdateDate
@@ -40,6 +43,7 @@ public static class NomenklProductTypeMappingExtensions
     {
         return new SD_77
         {
+            Id = dto.Id,
             DOC_CODE = dto.DocCode,
             TV_NAME = dto.Name,
             UpdateDate = dto.UpdateDate,

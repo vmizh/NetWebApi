@@ -8,6 +8,7 @@ public static class BankMappingExtensions
     {
         return new BankDto
         {
+            Id = entity.Id,
             DocCode = entity.DOC_CODE,
             Name = entity.BANK_NAME,
             CorrespAcc = entity.CORRESP_ACC,
@@ -22,6 +23,7 @@ public static class BankMappingExtensions
     {
         return new SD_44
         {
+            Id = dto.Id,
             DOC_CODE = dto.DocCode,
             BANK_NAME = dto.Name,
             CORRESP_ACC = dto.CorrespAcc,

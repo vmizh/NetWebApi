@@ -8,6 +8,7 @@ public static class ResponsibilityMappingExnetsions
     {
         return new ResponsibilityDto
         {
+            Id = entity.Id,
             DocCode = entity.DOC_CODE,
             Name = entity.CENT_NAME,
             NameFull = entity.CENT_FULLNAME,
@@ -21,6 +22,7 @@ public static class ResponsibilityMappingExnetsions
     {
         return new SD_40
         {
+            Id = dto.Id,
             DOC_CODE = dto.DocCode,
             CENT_FULLNAME = dto.NameFull,
             CENT_NAME = dto.Name,

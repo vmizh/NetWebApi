@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using Common.Helper.API;
 using Data.SqlServer.KursReferences.Context;
+using DTO.KursReferences.Currency;
 using Kurs.References.Services.Services.CurrencyService;
 using Serilog;
 
@@ -18,13 +19,15 @@ public static class CurrencyEndPoint
         ICurrencyService service, IKursReferenceContextRepository contextRepository, CancellationToken cancelToken)
     {
         Log.Logger.Information($"Получение списка всех валют в БД {contextRepository.GetContextName(request.DbId)}");
-        var response = new APIResponse();
+
+        APIResponse response = new APIResponse()
+        {
+            IsSuccess = false,
+            StatusCode = HttpStatusCode.InternalServerError
+        };
         try
         {
-            var saved = await ((CurrencyService)service).GetAllAsync(request, cancelToken);
-            response.IsSuccess = true;
-            response.StatusCode = HttpStatusCode.OK;
-            response.Result = saved;
+            response = await ((CurrencyService)service).GetAllAsync(request, cancelToken);
             return Results.Ok(response);
         }
         catch (Exception ex)

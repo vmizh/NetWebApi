@@ -4,6 +4,7 @@ namespace DTO.KursReferences.Bank;
 
 public record BankAccountDto
 {
+    public required Guid Id { set; get; }
     public required decimal DocCode { set; get; }
     public required int RashAccCode { set; get; }
     public required string RashAcc { set; get; }

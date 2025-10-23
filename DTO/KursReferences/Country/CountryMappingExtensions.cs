@@ -18,7 +18,7 @@ public static class CountryMappingExtensions
     {
         return new CountryFullDto
         {
-            Id = Guid.Parse(entity.ID),
+            Id = entity.Id,
             Name = entity.NAME,
             UpdateDate = entity.UpdateDate,
             ALPHA2 = entity.ALPHA2,
@@ -37,7 +37,7 @@ public static class CountryMappingExtensions
     {
         return new COUNTRY
         {
-            ID = dto.Id.ToString(),
+            Id = dto.Id,
             NAME = dto.Name,
             UpdateDate = dto.UpdateDate
         };
@@ -47,7 +47,7 @@ public static class CountryMappingExtensions
     {
         return new COUNTRY
         {
-            ID = dto.Id.ToString(),
+            Id = dto.Id,
             NAME = dto.Name,
             UpdateDate = dto.UpdateDate,
 

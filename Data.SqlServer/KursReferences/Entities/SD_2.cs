@@ -8,8 +8,8 @@ public class SD_2 : IDocCodeIdentity
 
     public Guid Id
     {
-        get => string.IsNullOrWhiteSpace(ID) ? Guid.Empty : Guid.Parse(ID);
-        set => ID = ID = value.ToString();
+        get;
+        set;
     }
 
     public decimal DOC_CODE { get; set; }
@@ -33,8 +33,6 @@ public class SD_2 : IDocCodeIdentity
     public decimal? crs_dc { get; set; }
 
     public int? OLD { get; set; }
-
-    public string? ID { get; set; }
 
     public byte[]? PHOTO { get; set; }
 

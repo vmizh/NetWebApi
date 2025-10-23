@@ -8,6 +8,7 @@ public static class ProductMappingExtensions
     {
         return new ProductTypeDto
         {
+            Id = entity.Id,
             DocCode = entity.DOC_CODE,
             Name = entity.PROD_NAME,
             NameFull = entity.PROD_FULL_NAME,
@@ -20,6 +21,7 @@ public static class ProductMappingExtensions
     {
         return new SD_50
         {
+            Id = dto.Id,
             DOC_CODE = dto.DocCode,
             PROD_NAME = dto.Name,
             PROD_PARENT_DC = dto.ParentDC,

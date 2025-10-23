@@ -1,7 +1,9 @@
 ﻿namespace DTO.KursReferences.KontragentGroup;
 
-public class KontragentGroupDto
+public record KontragentGroupDto
 {
+    public required Guid GuidId { set; get; }
+
     public required int Id { get; set; }
 
     public required string Name { get; set; }

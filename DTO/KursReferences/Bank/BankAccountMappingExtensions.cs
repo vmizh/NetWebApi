@@ -9,6 +9,7 @@ public static class BankAccountMappingExtensions
     {
         return new BankAccountDto
         {
+            Id = entity.Id,
             DocCode = entity.DOC_CODE,
             RashAccCode = entity.BA_RASH_ACC_CODE,
             RashAcc = entity.BA_RASH_ACC,
@@ -27,6 +28,7 @@ public static class BankAccountMappingExtensions
     {
         return new SD_40
         {
+            Id = dto.Id,
             DOC_CODE = dto.DocCode,
             CENT_FULLNAME = dto.NameFull,
             CENT_NAME = dto.Name,

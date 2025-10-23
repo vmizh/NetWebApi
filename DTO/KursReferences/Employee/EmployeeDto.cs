@@ -4,9 +4,9 @@ namespace Data.SqlServer.KursReferences.Employee;
 
 public record EmployeeDto
 {
+    public required Guid Id { set; get; }
     public required decimal DocCode { set; get; }
     public required int TabelNumber { set; get; }
-    public required Guid? Id { set; get; }
     public string Name => $"{NameLast} {NameFirst} {NameSecond}";
     public required string NameLast { set; get; }
     public required string? NameFirst { set; get; }

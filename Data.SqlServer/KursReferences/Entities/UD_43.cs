@@ -2,7 +2,7 @@
 
 namespace Data.SqlServer.KursReferences.Entities;
 
-public class UD_43 : IBaseIdentity
+public class UD_43 : IGuidIdentity
 {
     public int EG_ID { get; set; }
 
@@ -22,9 +22,12 @@ public class UD_43 : IBaseIdentity
 
     public virtual ICollection<SD_43> SD_43 { get; set; } = new List<SD_43>();
 
-    public object Id
+
+    object IBaseIdentity.Id
     {
-        get => EG_ID;
-        set => EG_ID = (int)value;
+        get => Id;
+        set => Id = (Guid)value;
     }
+
+    public Guid Id { get; set; }
 }

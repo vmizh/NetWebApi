@@ -2,6 +2,7 @@
 
 public record BankDto
 {
+    public required Guid Id { get; set; }
     public required decimal DocCode { set; get; }
     public required string Name { set; get; }
     public required string? CorrespAcc {set; get; }

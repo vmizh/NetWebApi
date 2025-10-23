@@ -8,6 +8,7 @@ public static class RegionMappingExtensions
     {
         return new RegionDto
         {
+            Id = entity.Id,
             DocCode = entity.DOC_CODE,
             Name = entity.REG_NAME,
             ParentDC = entity.REG_PARENT_DC,
@@ -19,6 +20,7 @@ public static class RegionMappingExtensions
     {
         return new SD_23
         {
+            Id = dto.Id,
             DOC_CODE = dto.DocCode,
             REG_NAME = dto.Name,
             REG_PARENT_DC = dto.ParentDC,
