@@ -4,7 +4,7 @@ public struct APIRequest
 {
     public APIRequest()
     {
-        DbId = default;
+        DbId = Guid.Empty;
         RequestData = null;
     }
 

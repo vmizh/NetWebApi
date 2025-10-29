@@ -34,7 +34,7 @@ public class KursReferenceContextRepository : IKursReferenceContextRepository
                 Id = Guid.Parse("117B9C94-49B9-4011-9002-3ED7B0E39175"),
                 Name = "LocalTest",
                 RedisId = 15
-            },"Server=192.168.89.101,1433;Initial Catalog=LocalTest;Persist Security Info=False; " +
+            },"Server=192.168.89.101,1433;Initial Catalog=AlfaTest;Persist Security Info=False; " +
               "User ID=sa;Password=CbvrfFhntvrf65;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;" );
 
         Register(new DbContextInfo

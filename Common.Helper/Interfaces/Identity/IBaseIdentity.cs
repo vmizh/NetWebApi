@@ -4,3 +4,5 @@ public interface IBaseIdentity
 {
     object Id { set; get; }
 }
+
+

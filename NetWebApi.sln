@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kurs.ReferencesAPI", "Kurs.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kurs.References.Services", "Kurs.Referebces.Services\Kurs.References.Services.csproj", "{1275AE87-7565-4E7F-BAD5-187E7C96E9F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Avalonia", "Client.Avalonia\Client.Avalonia.csproj", "{F57B7A92-138A-4380-A8E2-C5256F4AFA60}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{1275AE87-7565-4E7F-BAD5-187E7C96E9F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1275AE87-7565-4E7F-BAD5-187E7C96E9F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1275AE87-7565-4E7F-BAD5-187E7C96E9F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F57B7A92-138A-4380-A8E2-C5256F4AFA60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F57B7A92-138A-4380-A8E2-C5256F4AFA60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F57B7A92-138A-4380-A8E2-C5256F4AFA60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F57B7A92-138A-4380-A8E2-C5256F4AFA60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
