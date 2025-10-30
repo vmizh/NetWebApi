@@ -13,5 +13,6 @@ public interface IKursReferencesBaseService<T> where T : class
     Task<APIResponse> GetByIdAsync(APIRequest requestd, CancellationToken cancelToken);
     Task<APIResponse> GetAllAsync(APIRequest request, CancellationToken cancelToken);
     Task<APIResponse> GetListAsync(APIRequest request, CancellationToken cancelToken);
+    Task<APIResponse> FindAsync(APIRequest request, CancellationToken cancelToken);
 }
 

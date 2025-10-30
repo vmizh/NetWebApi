@@ -1,7 +1,7 @@
 ﻿using System.Net;
-using Azure;
 using Common.Helper.API;
 using Common.Helper.Extensions;
+using Common.Repositories.Specification;
 using Data.SqlServer.KursReferences.Entities;
 using Data.SqlServer.KursReferences.Repositories.Base;
 using Data.SqlServer.KursReferences.Repositories.CurrencyRepository;
@@ -20,7 +20,7 @@ public class CurrencyService(IKursReferencesBaseRepository<SD_301> repository, I
     public async Task<APIResponse<List<CurrencyDto>>> GetAllFullAsync(APIRequest request,
         CancellationToken cancellationToken)
     {
-        var result = new APIResponse<List<CurrencyDto>>()
+        var result = new APIResponse<List<CurrencyDto>>
         {
             IsSuccess = false
         };
@@ -39,5 +39,41 @@ public class CurrencyService(IKursReferencesBaseRepository<SD_301> repository, I
             result.StatusCode = HttpStatusCode.InternalServerError;
             return result;
         }
+    }
+
+    public override async Task<APIResponse> FindAsync(APIRequest request, CancellationToken cancelToken)
+    {
+        var result = new APIResponse
+        {
+            IsSuccess = false
+        };
+        if (request.RequestData is not string s || string.IsNullOrEmpty(s))
+        {
+            result.ErrorMessages.Add("Наименование валюты пустое");
+            return result;
+        }
+        try
+        {
+            var spec = new CurrencyFindNameSpecification((string)request.RequestData);
+            var data = await repository.FindAsync(request.DbId, spec, cancelToken);
+            result.IsSuccess = true;
+            result.Result = data;
+
+            return result;
+        }
+        catch (Exception ex)
+        {
+            result.ErrorMessages = ex.ErrorTextList();
+            result.StatusCode = HttpStatusCode.InternalServerError;
+            return result;
+        }
+    }
+}
+
+public class CurrencyFindNameSpecification : Specification<SD_301>
+{
+    public CurrencyFindNameSpecification(string name)
+    {
+        AddFilteringQuery(_ => _.CRS_NAME.ToLower().Contains(name.ToLower()));
     }
 }

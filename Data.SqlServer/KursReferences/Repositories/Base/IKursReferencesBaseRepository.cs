@@ -1,8 +1,9 @@
 ﻿using Common.Helper.Interfaces.Identity;
+using Common.Repositories.Specification;
 
 namespace Data.SqlServer.KursReferences.Repositories.Base;
 
-public interface IKursReferencesBaseRepository<T>
+public interface IKursReferencesBaseRepository<T>  where T : class
 {
     Task CreateAsync(Guid dbId, T entity, CancellationToken cancelToken);
     Task CreateManyAsync(Guid dbId, IEnumerable<T> entities, CancellationToken cancelToken);
@@ -14,4 +15,6 @@ public interface IKursReferencesBaseRepository<T>
     Task<IEnumerable<T>> GetAllAsync(Guid dbId, CancellationToken cancelToken);
     Task<IEnumerable<T>> GetListAsync(Guid dbId, List<IBaseIdentity> ids, CancellationToken cancelToken);
     string GetDbName(Guid id);
+    Task<IEnumerable<T>> FindAsync(Guid dbId, Specification<T> specification, CancellationToken cancelToken);
+
 }

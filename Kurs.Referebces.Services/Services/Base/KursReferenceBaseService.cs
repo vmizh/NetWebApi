@@ -2,6 +2,7 @@
 using Common.Helper.API;
 using Common.Helper.Interfaces;
 using Common.Helper.Interfaces.Identity;
+using Common.Repositories.Specification;
 using Data.SqlServer.KursReferences.Repositories.Base;
 using DTO.Common;
 using Mapster;
@@ -348,6 +349,18 @@ public class KursReferenceBaseService<T>(IKursReferencesBaseRepository<T> reposi
             response.ErrorMessages.Add(ex.Message);
             return response;
         }
+    }
 
+    public virtual async Task<APIResponse> FindAsync(APIRequest request, CancellationToken cancelToken)
+    {
+        Log.Logger.Information($"{RepositoryName}. Получение списка записей по условиям.");
+        var response = new APIResponse();
+        var spec = new SpecificationBase<T>();
+        var res = await repository.FindAsync(request.DbId, spec, cancelToken);
+        response.IsSuccess = false;
+        response.StatusCode = HttpStatusCode.NoContent;
+        response.Result = res;
+        response.ErrorMessages.Add("Вызов поиска не перегруженного метода FindAsync");
+        return response;
     }
 }

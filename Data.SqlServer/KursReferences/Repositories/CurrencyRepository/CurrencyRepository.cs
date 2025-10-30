@@ -9,4 +9,5 @@ namespace Data.SqlServer.KursReferences.Repositories.CurrencyRepository;
 public class CurrencyRepository(IKursReferenceContextRepository repository)
     : KursReferencesBaseRepository<SD_301>(repository), ICurrencyRepository
 {
+    
 }

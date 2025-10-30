@@ -1,4 +1,6 @@
 ﻿using Common.Helper.Interfaces.Identity;
+using Common.Repositories.Specification;
+using Data.SqlServer.Extensions;
 using Data.SqlServer.KursReferences.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,11 +9,19 @@ namespace Data.SqlServer.KursReferences.Repositories.Base;
 public class KursReferencesBaseRepository<T>(IKursReferenceContextRepository contextRepository)
     : IKursReferencesBaseRepository<T> where T : class, IBaseIdentity
 {
-    protected IKursReferenceContextRepository myContextRepository = contextRepository;
+    protected readonly IKursReferenceContextRepository myContextRepository = contextRepository;
 
     public string GetDbName(Guid id)
     {
         return myContextRepository.GetContextName(id);
+    }
+
+    public async Task<IEnumerable<T>> FindAsync(Guid dbId, Specification<T> specification, CancellationToken cancelToken)
+    {
+        var ctx = myContextRepository.GetContext(dbId);
+        if (ctx is null)
+            throw new NullReferenceException("IKursReferenceContextRepository.FindAsync - контекст базы данных - null");
+        return await ctx.ApplySpecification(specification).ToListAsync(cancelToken);
     }
 
     public virtual async Task CreateAsync(Guid dbId, T entity, CancellationToken cancelToken)
@@ -155,11 +165,9 @@ public class KursReferencesBaseRepository<T>(IKursReferenceContextRepository con
                         return await ctx.Set<T>().Where(_ => intIds.Contains((int)_.Id)).ToListAsync(cancelToken);
                     default:
                         docCodes.AddRange(ids.Select(_ => _.Id).Select(Convert.ToDecimal));
-                        var s = ctx.Set<T>().Where(_ => docCodes.Contains(((IDocCodeIdentity)_).DOC_CODE)).ToQueryString();
                         return await ctx.Set<T>().Where(_ => docCodes.Contains(((IDocCodeIdentity)_).DOC_CODE)).ToListAsync(cancelToken);
                 }
         }
-
         throw new ArgumentException("Список ключей не верен");
     }
 }

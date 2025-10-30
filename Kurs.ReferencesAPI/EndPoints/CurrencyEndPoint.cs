@@ -17,6 +17,27 @@ public static class CurrencyEndPoint
         dsMap.MapPost("/all", GetGurrencies).WithName("GetGurrencies");
         dsMap.MapPost("/", GetCurrency).WithName("GetGurrency");
         dsMap.MapPost("/list", GetListCurrencies).WithName("GetListCurrencies");
+        dsMap.MapPost("/find", FindCurrencies).WithName("FindCurrencies");
+    }
+
+    private static async Task<IResult> FindCurrencies(APIRequest request,ICurrencyService service,
+        IKursReferenceContextRepository contextRepository, CancellationToken cancelToken)
+    {
+        var response = new APIResponse
+        {
+            IsSuccess = false,
+            StatusCode = HttpStatusCode.InternalServerError
+        };
+        try
+        {
+            response = await ((CurrencyService)service).GetListAsync(request, cancelToken);
+            return Results.Ok(response);
+        }
+        catch (Exception ex)
+        {
+            Log.Logger.Error($"/api/currency/list {ex.ErrorText()}");
+            return APIResponse.ReturnError(response, ex,Log.Logger);
+        }
     }
 
     private static async Task<IResult> GetListCurrencies(APIRequest request,

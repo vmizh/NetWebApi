@@ -1,8 +1,9 @@
 ﻿using Common.Helper.Interfaces.Identity;
-using Common.Repositories;
 using Data.SqlServer.KursReferences.Context;
 using Data.SqlServer.KursSystem.Context;
 using Microsoft.EntityFrameworkCore;
+using Common.Repositories;
+using Common.Repositories.Specification;
 
 namespace Data.SqlServer.Base;
 
@@ -120,6 +121,16 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class, IBaseIdenti
     {
         return await myDbContext.Set<T>().ToListAsync();
     }
+
+    public async Task<IEnumerable<T>> WhereAsync(ISpecification<T> specification, CancellationToken cancellationToken = default)
+    {
+        var efCoreSpecification = new EfCoreSpecification<T>(specification);
+
+        var query = myDbContext.Set<T>().AsNoTracking();
+        query = efCoreSpecification.Apply(query);
+
+        return await query.ToListAsync(cancellationToken).ConfigureAwait(false);
+    }
 }
 
 
@@ -231,6 +242,16 @@ public class BaseDbRepository<T>(KursReferenceContextRepository contextRepposito
     public async Task<IEnumerable<T>> GetAllAsync()
     {
         return await myDbContext.Set<T>().ToListAsync();
+    }
+
+    public async Task<IEnumerable<T>> WhereAsync(ISpecification<T> specification, CancellationToken cancellationToken = default)
+    {
+        var efCoreSpecification = new EfCoreSpecification<T>(specification);
+
+        var query = myDbContext.Set<T>().AsNoTracking();
+        query = efCoreSpecification.Apply(query);
+
+        return await query.ToListAsync(cancellationToken).ConfigureAwait(false);
     }
 
     public void SetDbContext(string name)
